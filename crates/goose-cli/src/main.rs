@@ -292,6 +292,7 @@ async fn main() -> Result<()> {
             } else {
                 suites
             };
+            let current_dir = std::env::current_dir()?;
 
             for i in 0..repeat {
                 if repeat > 1 {
@@ -307,7 +308,7 @@ async fn main() -> Result<()> {
 
                 // Save to file if specified
                 if let Some(path) = &output {
-                    std::fs::write(path, &output_str)?;
+                    std::fs::write(current_dir.join(path), &output_str)?;
                     println!("Results saved to: {}", path.display());
                 } else {
                     // Print to console
